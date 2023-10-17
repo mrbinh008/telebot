@@ -18,7 +18,7 @@ bot.onText(/\/help/, (msg) => {
     const firstName = msg.from.first_name;
     const lastName = msg.from.last_name;
     const userName = lastName ? `${firstName} ${lastName}` : firstName;
-    let message = `Hi ${userName}! I'm ZoroBot. I can help you with the following commands:\n` +
+    let message = `Hi ${userName}! I'm Zoro Bot. I can help you with the following commands:\n` +
         "/roadmap - Zoro roadmap\n" +
         "/whitepaper - Zoro whitepaper\n" +
         "/listing - Zoro listing\n" +
