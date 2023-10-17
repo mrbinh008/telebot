@@ -1,0 +1,19 @@
+{
+  "name": "telegrambot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mrbinh008/telebot.git",
+  "author": "mrbinh008 <binhvtx3@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@types/node": "^20.8.6",
+    "config": "^3.3.9",
+    "dotenv": "^16.3.1",
+    "node-telegram-bot-api": "^0.63.0",
+    "nodemon": "^3.0.1"
+  }
+}
