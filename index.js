@@ -5,7 +5,6 @@ require('dotenv').config();
 const telegramToken = process.env['BOT_TOKEN'];
 const bot = new TelegramBot(telegramToken, {polling: true});
 
-// DbService.connect().then(() => {
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     const firstName = msg.from.first_name;
@@ -66,7 +65,7 @@ bot.onText(/\/whitepaper/, (msg) => {
             ]
         ]
     }
-    let message="What is ZoroToken?\n";
+    let message = "What is ZoroToken?\n";
     bot.sendMessage(chatId, message, {
         reply_markup: inlineKeyboard
     });
@@ -92,7 +91,7 @@ bot.onText(/\/tokenomics/, (msg) => {
     const message = "Stage 1 (from 20/06/2023): Issue 50 billion Zoro Tokens – Priced at $0.000075/ZRT.\n" +
         "Stage 2 (from 10/10/2023 to 31/10/2023): Issue 50 billion Zoro Tokens – Priced at $0.000225/ZRT.\n" +
         "Stage 3 (from 1/11/2023): Price will fluctuate based on the market after the project is listed on major exchanges.";
-   const inlineKeyboard = {
+    const inlineKeyboard = {
         inline_keyboard: [
             [
                 {
@@ -101,7 +100,7 @@ bot.onText(/\/tokenomics/, (msg) => {
                 },
                 {
                     text: 'Buy Zorotoken',
-                     url: 'https://coinsbit.io/ieo-list/ZRT_123'
+                    url: 'https://coinsbit.io/ieo-list/ZRT_123'
                 }
             ]
         ]
@@ -113,6 +112,6 @@ bot.onText(/\/tokenomics/, (msg) => {
 });
 bot.onText(/\/airdrop/, (msg) => {
     const chatId = msg.chat.id;
-    bot.sendMessage(chatId, 'Xin chào! Đây là airdrop');
+    bot.sendMessage(chatId, 'Airdrop is coming soon!');
 });
 
