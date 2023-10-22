@@ -5,5 +5,7 @@
   ],
   "adminIds": [
     1118952028
-  ]
+  ],
+  "isBannedWord": false,
+  "isBannedLink": false
 }

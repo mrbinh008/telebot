@@ -8,6 +8,8 @@ const config = JSON.parse(configData);
 const bannedWords = config.bannedWords;
 // Danh sách id người dùng có quyền admin
 const adminIds = config.adminIds;
+const isBannedWord = config.isBannedWord;
+const isBannedLink = config.isBannedLink;
 require('dotenv').config();
 
 const telegramToken = process.env['BOT_TOKEN'];
@@ -162,7 +164,7 @@ bot.onText(/\/buy/, (msg) => {
 });
 bot.onText(/\/broker_partner/, (msg) => {
     const chatId = msg.chat.id;
-    let message="✅ Zororium would like to announce: In order for the group discussion to revolve around the topic of Zororium's potential and strong development, topics about profit analysis for investors.   \n" +
+    let message = "✅ Zororium would like to announce: In order for the group discussion to revolve around the topic of Zororium's potential and strong development, topics about profit analysis for investors.   \n" +
         "- Zororium officially sets up groups for partners who are marketing companies, KOLs or individual marketers.   \n" +
         "- Therefore, we will delete any posts about marketing and advertising, and permanently ban members who violate repeatedly.   \n" +
         "  \n" +
@@ -191,12 +193,12 @@ bot.onText(/\/launchpad_IEO/, (msg) => {
             ]
         ]
     };
-    let message="👍IEO & Launchpad campaigns:\n" +
+    let message = "👍IEO & Launchpad campaigns:\n" +
         "- Coinsbit | Pinksale | Probit | Bitforex | Coinstore | Azbit | XT | Toobit | Bitmart.\n" +
         "- Implementation period: Ends October 31th. \n" +
         "- Buy Zororirum $ZRT Tokens on Pinksale and Coinsbit with a minimum of $50, and get a whopping 20% back on your total transaction from Team Zororium! \n" +
         "- Choose your reward: 💰10% in USDT or a generous 20% in ZRT! 🎉  \n";
-    bot.sendMessage(chatId, message,{
+    bot.sendMessage(chatId, message, {
         reply_markup: inlineKeyboard
     });
 });
@@ -269,7 +271,7 @@ bot.onText(/\/social/, (msg) => {
 });
 bot.onText(/\/community/, (msg) => {
     const chatId = msg.chat.id;
-    let message=" 🏁 Global Room: https://t.me/zororiumen \n" +
+    let message = " 🏁 Global Room: https://t.me/zororiumen \n" +
         " 🇻🇳 Vietnamese Room: https://t.me/zororiumvietnam\n" +
         " 🇯🇵 Jananese Room: https://t.me/Zororiumjp \n" +
         " 🇨🇳 Chinese Room: https://t.me/Zororiumcn \n" +
@@ -284,7 +286,7 @@ bot.onText(/\/community/, (msg) => {
         " 🇹🇷 Turkey Room: https://t.me/zororiumtr\n" +
         " 🇲🇦 Maroc Room: https://t.me/zororiumma\n" +
         " 🇱🇾 Libya Room: https://t.me/zororiumly\n";
-    bot.sendMessage(chatId, message,{
+    bot.sendMessage(chatId, message, {
         parse_mode: 'HTML'
     });
 })
@@ -358,12 +360,21 @@ bot.on('message', (msg) => {
     const chatId = msg.chat.id;
     const text = msg.text;
     const userId = Number(msg.from.id);
-    if (!checkRule(userId) && containsLink(text)) {
-        bot.deleteMessage(chatId, msg.message_id);
-    }
-    if (!checkRule(userId) && containsBannedWord(text)) {
-        bot.deleteMessage(chatId, msg.message_id);
-    }
+    // bot.sendMessage(chatId, `Your message: ${checkBannedLinkStatus()} , ${checkBannedWordStatus()}`);
+    bot.getChatMember(chatId, userId).then((chatMember) => {
+        const isAdmin = chatMember.status === 'administrator' || chatMember.status === 'creator';
+        if (!isAdmin) {
+            if (checkBannedLinkStatus()&&containsLink(text)) {
+                bot.deleteMessage(chatId, msg.message_id);
+            }
+            if (checkBannedWordStatus()&&containsBannedWord(text)) {
+                bot.deleteMessage(chatId, msg.message_id);
+            }
+        }
+    }).catch((error) => {
+        console.error(error);
+        bot.sendMessage(chatId, 'Đã xảy ra lỗi khi xử lý tin nhắn');
+    });
 });
 // Các lệnh quản trị viên
 bot.onText(/\/controller/, (msg, match) => {
@@ -375,6 +386,10 @@ bot.onText(/\/controller/, (msg, match) => {
         "/set_blacklist <word> - Thêm từ khóa <word> vào danh sách cấm\n" +
         "/rm_blacklist <word> - Xóa từ khóa <word> khỏi danh sách cấm\n" +
         "/list_blacklist - Hiển thị danh sách từ khóa bị cấm\n" +
+        "/on_banned_link - Bật chế độ cấm liên kết\n" +
+        "/off_banned_link - Tắt chế độ cấm liên kết\n" +
+        "/on_blacklist - Bật chế độ cấm từ khóa\n" +
+        "/off_blacklist - Tắt chế độ cấm từ khóa\n" +
         "/info - Hiển thị thông tin người dùng\n" +
         "/test - Kiểm tra quyền quản trị viên\n";
     if (checkRule(userId)) {
@@ -414,6 +429,42 @@ bot.onText(/\/set_blacklist (.+)/, (msg, match) => {
     setBannedWords(text);
     bot.sendMessage(chatId, `Đã thêm từ khóa ${text} vào danh sách cấm`);
 })
+bot.onText(/\/rm_blacklist (.+)/, (msg, match) => {
+    const chatId = msg.chat.id;
+    const text = match[1];
+    let flag;
+    bannedWords.includes(text) ? flag = true : flag = false;
+    if (flag) {
+        removeBannedWord(text);
+        bot.sendMessage(chatId, `Đã xóa từ khóa ${text} khỏi danh sách cấm`);
+    } else {
+        bot.sendMessage(chatId, `Từ khóa ${text} không có trong danh sách cấm`);
+    }
+});
+bot.onText(/\/on_banned_link/, (msg) => {
+    const chatId = msg.chat.id;
+    config.isBannedLink = true;
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+    bot.sendMessage(chatId, 'Đã bật chế độ cấm liên kết');
+});
+bot.onText(/\/off_banned_/, (msg) => {
+   const chatId = msg.chat.id;
+    config.isBannedLink = false;
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+    bot.sendMessage(chatId, 'Đã tắt chế độ cấm liên kết');
+});
+bot.onText(/\/on_blacklist/, (msg) => {
+    const chatId = msg.chat.id;
+    config.isBannedWord = true;
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+    bot.sendMessage(chatId, 'Đã bật chế độ cấm từ khóa cấm');
+});
+bot.onText(/\/off_blacklist/, (msg) => {
+    const chatId = msg.chat.id;
+    config.isBannedWord = false;
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+    bot.sendMessage(chatId, 'Đã tắt chế độ từ khóa cấm');
+});
 bot.onText(/\/unset_rule (.+)/, (msg, match) => {
     const chatId = msg.chat.id;
     const text = match[1];
@@ -424,18 +475,6 @@ bot.onText(/\/unset_rule (.+)/, (msg, match) => {
     } else {
         unsetAdmin(Number(text));
         bot.sendMessage(chatId, `Đã xóa quyền admin của người dùng có id ${text}`);
-    }
-});
-bot.onText(/\/rm_blacklist (.+)/, (msg, match) => {
-    const chatId = msg.chat.id;
-    const text = match[1];
-    let flag ;
-    bannedWords.includes(text) ?flag = true : flag = false;
-    if (flag) {
-        removeBannedWord(text);
-        bot.sendMessage(chatId, `Đã xóa từ khóa ${text} khỏi danh sách cấm`);
-    } else {
-        bot.sendMessage(chatId, `Từ khóa ${text} không có trong danh sách cấm`);
     }
 });
 bot.onText(/\/set_rule (.+)/, (msg, match) => {
@@ -451,6 +490,7 @@ function containsLink(text) {
     const linkRegex = /(https?:\/\/[^\s]+)|([a-zA-Z0-9-]+\.+[a-zA-Z0-9-.]+)/g;
     return linkRegex.test(text);
 }
+
 function containsBannedWord(text) {
     for (const word of bannedWords) {
         if (text.toLowerCase().includes(word.toLowerCase())) {
@@ -459,6 +499,7 @@ function containsBannedWord(text) {
     }
     return false;
 }
+
 function setBannedWords(words) {
     if (fs.existsSync(configPath)) {
         if (!config.bannedWords.includes(words)) {
@@ -472,6 +513,7 @@ function setBannedWords(words) {
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
     }
 }
+
 function setAdminIds(userId) {
     if (fs.existsSync(configPath)) {
         if (!config.adminIds.includes(userId)) {
@@ -485,9 +527,11 @@ function setAdminIds(userId) {
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
     }
 }
+
 function checkRule(userId) {
     return adminIds.includes(Number(userId));
 }
+
 function unsetAdmin(userId) {
     const index = config.adminIds.indexOf(userId);
     if (index !== -1) {
@@ -498,6 +542,7 @@ function unsetAdmin(userId) {
         console.log(`User ${userId} is not an admin.`);
     }
 }
+
 function removeBannedWord(word) {
     const index = config.bannedWords.indexOf(word);
     if (index !== -1) {
@@ -509,3 +554,9 @@ function removeBannedWord(word) {
     }
 }
 
+function checkBannedLinkStatus() {
+    return isBannedLink;
+}
+function checkBannedWordStatus() {
+    return isBannedWord;
+}
