@@ -34,7 +34,7 @@ bot.onText(/\/help/, (msg) => {
         "/airdrop - Zoro airdrop\n" +
         "/buy - Zoro buy\n" +
         "/broker_partner - Zoro broker partner\n" +
-        "/launchpad_IEO - Zoro launchpad IEO\n" +
+        "/launchpad_ieo - Zoro launchpad IEO\n" +
         "/ecosystem - Zoro ecosystem\n" +
         "/warning - Zoro warning\n" +
         "/support - Zoro support\n" +
@@ -173,7 +173,7 @@ bot.onText(/\/broker_partner/, (msg) => {
         "⭐️ https://t.me/+6Sil0SGOgl9jODU1\n";
     bot.sendMessage(chatId, message);
 })
-bot.onText(/\/launchpad_IEO/, (msg) => {
+bot.onText(/\/launchpad_ieo/, (msg) => {
     const chatId = msg.chat.id;
     const inlineKeyboard = {
         inline_keyboard: [
