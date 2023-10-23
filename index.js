@@ -59,8 +59,16 @@ Zororium Roadmap\n` + "Phase 1: Initiation and Construction (from 6/2023 – Oct
                     url: 'https://zorotoken.io/roadmap-2/'
                 },
                 {
-                    text: 'Buy Zorotoken',
-                    url: 'https://coinsbit.io/ieo-list/ZRT_123'
+                    text: '✅ProBit',
+                    url: 'https://www.probit.com/en-us/ieo/zrt-round2/0'
+                },
+                {
+                    text: '✅Coinsbit',
+                    url: 'https://coinsbit.io/vn/ieo-list/ZRT_123'
+                },
+                {
+                    text: '✅Pinksale',
+                    url: 'https://www.pinksale.finance/launchpad/0x362F99acAB238fCf557a657b5b259396a06761e0?chain=BSC'
                 }
             ]
         ]
@@ -79,8 +87,16 @@ bot.onText(/\/whitepaper/, (msg) => {
                     url: 'https://zorotoken.gitbook.io/zorotoken.io/introduction/what-is-zorotoken'
                 },
                 {
-                    text: 'Buy Zorotoken',
-                    url: 'https://coinsbit.io/ieo-list/ZRT_123'
+                    text: '✅ProBit',
+                    url: 'https://www.probit.com/en-us/ieo/zrt-round2/0'
+                },
+                {
+                    text: '✅Coinsbit',
+                    url: 'https://coinsbit.io/vn/ieo-list/ZRT_123'
+                },
+                {
+                    text: '✅Pinksale',
+                    url: 'https://www.pinksale.finance/launchpad/0x362F99acAB238fCf557a657b5b259396a06761e0?chain=BSC'
                 }
             ]
         ]
@@ -119,8 +135,16 @@ bot.onText(/\/tokenomics/, (msg) => {
                     url: 'https://zorotoken.io/zororium-tokennomics/'
                 },
                 {
-                    text: 'Buy Zorotoken',
-                    url: 'https://coinsbit.io/ieo-list/ZRT_123'
+                    text: '✅ProBit',
+                    url: 'https://www.probit.com/en-us/ieo/zrt-round2/0'
+                },
+                {
+                    text: '✅Coinsbit',
+                    url: 'https://coinsbit.io/vn/ieo-list/ZRT_123'
+                },
+                {
+                    text: '✅Pinksale',
+                    url: 'https://www.pinksale.finance/launchpad/0x362F99acAB238fCf557a657b5b259396a06761e0?chain=BSC'
                 }
             ]
         ]
@@ -132,7 +156,20 @@ bot.onText(/\/tokenomics/, (msg) => {
 });
 bot.onText(/\/airdrop/, (msg) => {
     const chatId = msg.chat.id;
-    bot.sendMessage(chatId, 'Airdrop is coming soon!');
+    let message="🎉 Announcement about Zororium - Receive 500ZRT in the Airdrop! 🎉\n" +
+        "\n" +
+        "Join this exciting Airdrop now and receive fantastic rewards! 🎁\n" +
+        "\n" +
+        "🔹 Click the link to participate in the Airdrop:\n" +
+        "bom.so/QbOXsX\n" +
+        "🔹 The event starts on 23/10 and ends on 31/10\n" +
+        "🔹 Receive a 40% ZRT reward from Zororium upon completing the minigame and an additional 60% ZRT after 3 months\n" +
+        "\n" +
+        "Follow X (mandatory): https://twitter.com/zorotokenio\n" +
+        "\n" +
+        "🎮✨ Remember to carefully read the rules and conditions of each campaign before participating.\n" +
+        "#minigame #zrt #Airdrop #Zororium";
+    bot.sendMessage(chatId, message);
 });
 bot.onText(/\/buy/, (msg) => {
     const chatId = msg.chat.id;
@@ -141,7 +178,7 @@ bot.onText(/\/buy/, (msg) => {
             [
                 {
                     text: '✅ProBit',
-                    url: 'https://www.probit.com/en-us/ieo/zrt-round1/0'
+                    url: 'https://www.probit.com/en-us/ieo/zrt-round2/0'
                 },
                 {
                     text: '✅Coinsbit',
@@ -180,7 +217,7 @@ bot.onText(/\/launchpad_ieo/, (msg) => {
             [
                 {
                     text: '✅ProBit',
-                    url: 'https://www.probit.com/en-us/ieo/zrt-round1/0'
+                    url: 'https://www.probit.com/en-us/ieo/zrt-round2/0'
                 },
                 {
                     text: '✅Coinsbit',
@@ -297,7 +334,7 @@ bot.onText(/\/promotion/, (msg) => {
             [
                 {
                     text: '✅ProBit',
-                    url: 'https://www.probit.com/en-us/ieo/zrt-round1/0'
+                    url: 'https://www.probit.com/en-us/ieo/zrt-round2/0'
                 },
                 {
                     text: '✅Coinsbit',
