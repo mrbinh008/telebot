@@ -156,7 +156,7 @@ bot.onText(/\/tokenomics/, (msg) => {
 });
 bot.onText(/\/airdrop/, (msg) => {
     const chatId = msg.chat.id;
-    let message="🎉 Announcement about Zororium - Receive 500ZRT in the Airdrop! 🎉\n" +
+    let message = "🎉 Announcement about Zororium - Receive 500ZRT in the Airdrop! 🎉\n" +
         "\n" +
         "Join this exciting Airdrop now and receive fantastic rewards! 🎁\n" +
         "\n" +
@@ -308,22 +308,89 @@ bot.onText(/\/social/, (msg) => {
 });
 bot.onText(/\/community/, (msg) => {
     const chatId = msg.chat.id;
-    let message = " 🏁 Global Room: https://t.me/zororiumen \n" +
-        " 🇻🇳 Vietnamese Room: https://t.me/zororiumvietnam\n" +
-        " 🇯🇵 Jananese Room: https://t.me/Zororiumjp \n" +
-        " 🇨🇳 Chinese Room: https://t.me/Zororiumcn \n" +
-        " 🇰🇷 Korean Room: https://t.me/Zororiumkr \n" +
-        " 🇲🇨 Indonesian Room: https://t.me/Zororiumid\n" +
-        " 🇵🇭 Indonesian Room: https://t.me/zororiumph\n" +
-        " 🇲🇽 Mexico Room: https://t.me/Zororiummx \n" +
-        " 🇬🇧 United Kingdom Room: https://t.me/Zororiumuk \n" +
-        " 🇺🇲 United State of America Room: https://t.me/Zororiumus \n" +
-        " 🇳🇬Nigeria Room: https://t.me/Zororiumng \n" +
-        " 🇿🇦 South Africa Room: https://t.me/Zororiumza\n" +
-        " 🇹🇷 Turkey Room: https://t.me/zororiumtr\n" +
-        " 🇲🇦 Maroc Room: https://t.me/zororiumma\n" +
-        " 🇱🇾 Libya Room: https://t.me/zororiumly\n";
+    const inlineKeyboard = {
+        inline_keyboard: [
+            [
+                {
+                    text: '🏁 Global Room',
+                    url: 'https://t.me/zororiumen'
+                },
+                {
+                    text: '🇻🇳 Vietnamese Room',
+                    url: 'https://t.me/zororiumvietnam'
+                }
+            ],
+            [
+                {
+                    text: '🇯🇵 Jananese Room',
+                    url: 'https://t.me/Zororiumjp'
+                },
+                {
+                    text: '🇨🇳 Chinese Room',
+                    url: 'https://t.me/Zororiumcn'
+                }
+            ],
+            [
+                {
+                    text: '🇰🇷 Korean Room',
+                    url: 'https://t.me/Zororiumkr'
+                },
+                {
+                    text: '🇲🇨 Indonesian Room',
+                    url: 'https://t.me/Zororiumid'
+                }
+            ],
+            [
+                {
+                    text: '🇵🇭 Philippines',
+                    url: 'https://t.me/zororiumph'
+                },
+                {
+                    text: ' 🇲🇽 Mexico Room',
+                    url: 'https://t.me/Zororiummx'
+                }
+            ],
+            [
+                {
+                    text: '🇬🇧United Kingdom Room',
+                    url: 'https://t.me/Zororiumuk'
+                },
+                {
+                    text: '🇺🇲 United State of America Room',
+                    url: 'https://t.me/Zororiumus'
+                }
+            ],
+            [
+                {
+                    text: '🇳🇬 Nigeria Room',
+                    url: 'https://t.me/Zororiumng'
+                },
+                {
+                    text: '🇿🇦 South Africa Room',
+                    url: 'https://t.me/Zororiumza'
+                }
+            ],
+            [
+                {
+                    text: '🇹🇷 Turkey Room',
+                    url: 'https://t.me/zororiumtr'
+                },
+                {
+                    text: '🇲🇦 Maroc Room',
+                    url: 'https://t.me/zororiumma'
+                }
+            ],
+            [
+                {
+                    text: '🇱🇾 Libya Room',
+                    url: 'https://t.me/zororiumly'
+                }
+            ]
+        ]
+    }
+    let message = "John our <b>Telegram Communities</b> for your preferred language by clicking the links below.\n" ;
     bot.sendMessage(chatId, message, {
+        reply_markup: inlineKeyboard,
         parse_mode: 'HTML'
     });
 })
@@ -401,10 +468,10 @@ bot.on('message', (msg) => {
     bot.getChatMember(chatId, userId).then((chatMember) => {
         const isAdmin = chatMember.status === 'administrator' || chatMember.status === 'creator';
         if (!isAdmin) {
-            if (checkBannedLinkStatus()&&containsLink(text)) {
+            if (checkBannedLinkStatus() && containsLink(text)) {
                 bot.deleteMessage(chatId, msg.message_id);
             }
-            if (checkBannedWordStatus()&&containsBannedWord(text)) {
+            if (checkBannedWordStatus() && containsBannedWord(text)) {
                 bot.deleteMessage(chatId, msg.message_id);
             }
         }
@@ -485,7 +552,7 @@ bot.onText(/\/on_banned_link/, (msg) => {
     bot.sendMessage(chatId, 'Đã bật chế độ cấm liên kết');
 });
 bot.onText(/\/off_banned_/, (msg) => {
-   const chatId = msg.chat.id;
+    const chatId = msg.chat.id;
     config.isBannedLink = false;
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
     bot.sendMessage(chatId, 'Đã tắt chế độ cấm liên kết');
@@ -594,6 +661,7 @@ function removeBannedWord(word) {
 function checkBannedLinkStatus() {
     return isBannedLink;
 }
+
 function checkBannedWordStatus() {
     return isBannedWord;
 }
