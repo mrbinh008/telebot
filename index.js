@@ -312,7 +312,7 @@ bot.onText(/\/community/, (msg) => {
         inline_keyboard: [
             [
                 {
-                    text: '🏁 Global Room',
+                    text: '🌐 Global Room',
                     url: 'https://t.me/zororiumen'
                 },
                 {
@@ -434,30 +434,34 @@ bot.onText(/\/minigame/, (msg) => {
         "🪙Zororium is having a very attractive Airdrop program, everyone quickly hunt for rewards to get rich.\n" +
         "MINI GAME: Airdrop 300M $ZRT (65.000USDT) Token:\n" +
         "\n" +
-        "🎁1000$ZRT gift: Share and post about $ZRT's exchange listing roadmap on Twitter(X) platform with hashtag #Comic_Coin_Zororium\n" +
+        "🎁1000$ZRT gift: Share and post about $ZRT's exchange listing roadmap on Twitter(X) platform with hastag #Comic_Coin_Zororium\n" +
         "🎁5000$ZRT gift: Post to 10 groups on Telegram with at least 5000 members\n" +
-        "🎁Gift 10000 $ZRT if you add 50 people to the group http://t.me/zororiumen\n" +
+        "🎁Gift 10000 $ZRT if you add 50 people to <a href='http://t.me/zororiumen'>the group</a>\n" +
         "\n" +
         "🏆The TOP 10 most interested people will immediately receive a gift of 1.000.000 $ZRT directly from the team.\n" +
         "\n" +
-        "Note: We pay 40% of the reward tokens immediately upon the campaign's completion, and the remaining 60% will be paid after 3 months\n" +
-        "\n" +
-        "👑Trading Volume | KYC | Audit | Safu.\n" +
+        "👑<a href='https://bscscan.com/token/0x40db4356751a9015c60cf8cbb456a581be39d6fc'>Trading Volume</a> | <a href='https://pinksale.notion.site/Zororium-KYC-Verification-61e7b2dfd16d4b47ace89cb203706df4?pvs=4'>KYC</a> | Audit | Safu.\n" +
         "\n" +
         "👍IEO & Launchpad campaigns:\n" +
-        "- Coinsbit | Pinksale | Probit | Bitforex | Coinstore | Azbit | XT | Toobit | Bitmart.\n" +
-        "- Implementation period: Ends October 31th.\n" +
-        "- Buy Zororirum $ZRT Tokens on Pinksale and Coinsbit with a minimum of $50, and get a whopping 20% back on your total transaction from Team Zororium!\n" +
-        "- Choose your reward: 💰10% in USDT or a generous 20% in ZRT! 🎉 \n" +
+        "- <a href='https://coinsbit.io/vn/ieo-list/ZRT_123'>Coinsbit</a> | <a href='https://www.pinksale.finance/launchpad/0x362F99acAB238fCf557a657b5b259396a06761e0?chain=BSC'> Pinksale </a>| <a href='https://www.probit.com/en-us/ieo/zrt-round2/0'> Probit </a> | Bitforex | Coinstore | Azbit | XT | Toobit | Bitmart.\n" +
+        "- Implementation period: Ends October 31th. \n" +
+        "- Buy Zororirum $ZRT Tokens on  <a href='https://www.pinksale.finance/launchpad/0x362F99acAB238fCf557a657b5b259396a06761e0?chain=BSC'>Pinksale </a> and <a href='https://coinsbit.io/vn/ieo-list/ZRT_123' >Coinsbit</a> with a minimum of $50, and get a whopping 20% back on your total transaction from Team Zororium! \n" +
+        "- Choose your reward: 💰10% in USDT or a generous 20% in ZRT! 🎉  \n" +
         "\n" +
-        "👍Listing campaigns:\n" +
+        "👍Listing campaigns: \n" +
         "- Phase 1: Coinsbit, Probit, Bitmart, Bitforex… (November 1th)\n" +
         "- Phase 2: OKX, Huobi (HTX), Kucoin, Binance. (November 11th)\n" +
         "\n" +
-        "👍Official portal: Website | Roadmap | Whitepaper | Tokenomics\n" +
+        "👍Official portal: <a href='https://zorotoken.io/'>Website</a> | <a href='https://zorotoken.io/roadmap-2/'>Roadmap</a> | <a href='https://zorotoken.io/wp-content/uploads/2023/07/Zororium-EBOOKwhitepaper.pdf'>Whitepaper</a>  | <a href='https://zorotoken.io/zororium-tokennomics-2/'>Tokenomics</a> \n" +
         "\n" +
-        "👍Socials Network:  Telegram | Twitter | Discord | Reddit\n";
-    bot.sendMessage(chatId, message);
+        "🗯ZORORIUM'S SOCIAL NETWORK\n" +
+        "\n" +
+        "✈️Telegram: <a href='https://t.me/zororiumen'>International 🌐</a> | <a href='https://t.me/zororiumvietnam'>Vietnamese 🇻🇳</a> | <a href='https://t.me/Zororiumjp'> Jananese 🇯🇵 </a> | <a href='https://t.me/Zororiumcn'>Chinese 🇨🇳 </a> | <a href='https://t.me/Zororiumkr'>Korean 🇰🇷</a> | <a href='https://t.me/Zororiumid'>Indonesian 🇲🇨</a> | <a href='https://t.me/Zororiumph'>Philippines 🇵🇭</a> | <a href='https://t.me/Zororiumin'>India 🇮🇳</a> | <a href='https://t.me/Zororiummx'>Mexico 🇲🇽</a> | <a href='https://t.me/Zororiumuk'>United Kingdom 🇬🇧</a> | <a href='https://t.me/Zororiumus'>United State of America 🇺🇲</a> | <a href='https://t.me/Zororiumng'>Nigeria 🇳🇬</a> | <a href='https://t.me/Zororiumly'>Libya 🇱🇾</a> | <a href='https://t.me/Zororiumza'>South Africa 🇿🇦</a> | <a href='https://t.me/Zororiuktr'>Turkey 🇹🇷</a> | <a href='https://t.me/Zororiumma'>Morocco 🇲🇦</a> | <a href='https://t.me/Zororiumau'>Australia 🇦🇺</a> \n" +
+        "\n" +
+        "🐤<a href='https://twitter.com/zorotokenio'>Twitter</a> | <a href='https://discord.gg/h6RDpFXb'>👾Discord</a> | <a href='https://www.reddit.com/user/zororiumcoin'>🐳 Reddit</a> | <a href='https://www.youtube.com/@zororiumcoin'>📹Youtube</a>";
+    bot.sendMessage(chatId, message,{
+        parse_mode: 'HTML'
+    });
 })
 // Xử lý tin nhắn spam
 bot.on('message', (msg) => {
